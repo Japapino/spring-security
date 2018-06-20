@@ -22,10 +22,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity httpSecurity) throws Exception{
 		
 		httpSecurity
-			.authorizeRequests()
-			//.andMatchers("**//rest/*)
-			.anyRequest() //allow all requests
-			.permitAll()
+			.authorizeRequests() //all requests(URIs)
+//			.antMatchers("*/hello").hasRole("USER") //any request with "/hello" in the uri will only allow users with the role of USER. 
+			//.antMatchers("**//rest/*)			.anyRequest() //allow all requests
+			.anyRequest()
+//			.permitAll()
+			.fullyAuthenticated()
 			.and().httpBasic();
 		httpSecurity.csrf().disable(); 
 		
